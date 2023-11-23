@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import Posts from "../components/posts";
 
 export default function HomePage() {
