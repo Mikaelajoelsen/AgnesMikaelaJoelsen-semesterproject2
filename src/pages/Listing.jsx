@@ -5,6 +5,15 @@ import { API_URL } from "../lib/constants";
 const initialListingState = {
   title: "No post found",
   body: "Nothing to see here",
+  description: "Your Description",
+  media: [],
+  tags: [],
+  created: "2023-09-28T20:32:07.084Z",
+  updated: "2023-09-28T20:32:07.084Z",
+  endsAt: "2023-10-01T12:00:00.000Z",
+  _count: {
+    bids: 1,
+  },
   userId: null,
   id: null,
 };
