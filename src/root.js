@@ -30,7 +30,7 @@ const registerRoute = new Route({
 
 const ListingRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "/listing",
+  path: "/listing/$itemid",
   component: ListingPage,
 });
 

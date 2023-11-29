@@ -153,7 +153,7 @@ function RegisterForm() {
                 <input
                   id="avatar"
                   name="avatar"
-                  type="file"
+                  type="url"
                   autoComplete="avatar"
                   className="flex content-center w-full h-12 px-4 mt-1 text-black placeholder-gray-900 border rounded-full shadow-sm focus:outline-none focus:ring focus:border-indigo-600"
                 />

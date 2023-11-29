@@ -1,9 +1,9 @@
-import Posts from "../components/posts";
+import Listings from "./Listings";
 
 export default function HomePage() {
   return (
     <section>
-      <Posts />
+      <Listings />
       <h1>this is the home HomePage</h1>
     </section>
   );
