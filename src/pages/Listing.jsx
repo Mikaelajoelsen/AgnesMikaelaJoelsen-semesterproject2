@@ -48,10 +48,10 @@ export default function ListingPage() {
 
   return (
     <Link className="button" to={`/listing/${item.id}`}>
-      <div className="flex flex-col max-w-xl mx-auto mb-6 overflow-hidden bg-white border rounded-md shadow-lg sm:flex-row">
+      <div className="flex flex-col max-w-xl mx-auto mb-6 overflow-hidden bg-white border shadow-lg rounded-m sm:flex-row">
         <div className="sm:w-1/2">
           <img className="object-cover w-full h-64" src={item?.media} alt="" />
-          <p className="flex justify-center">Description</p>
+          <p className="flex justify-center text-black">Description</p>
         </div>
         <div className="p-6 sm:w-1/2">
           <h1 className="flex justify-center mb-2 text-3xl font-bold text-black">
@@ -71,6 +71,10 @@ export default function ListingPage() {
           </p>
           <p className="text-gray-700">{item?.body}</p>
           <div className="flex justify-between mt-4"></div>
+          <div className="flex flex-wrap justify-center space-x-3 text-black">
+            <button className="flex-2">Number</button>
+            <button className="flex-2">Place Bid +</button>
+          </div>
         </div>
       </div>
     </Link>

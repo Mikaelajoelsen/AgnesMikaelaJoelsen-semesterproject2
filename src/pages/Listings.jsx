@@ -11,7 +11,7 @@ const getRandomImage = async () => {
   }
 };
 
-export default function ListingsPage() {
+const ListingsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
@@ -64,15 +64,23 @@ export default function ListingsPage() {
 
   return (
     <section>
-      <h1 className="mb-4 text-4xl font-bold">All Listings</h1>
-      <div className="mb-4">
+      <h1 className="flex justify-center mb-4 text-4xl font-bold">
+        All Listings
+      </h1>
+      <div className="flex justify-center mb-4">
         <input
           type="text"
           placeholder="Search..."
-          className="p-2 border border-gray-300 rounded-md"
+          className="flex w-4/6 p-2 border border-gray-600 bg-inherit"
           value={searchTerm}
           onChange={handleSearchChange}
         />
+        <button
+          className="flex font-thin text-black border-gray-600 rounded-none bg-inherit"
+          onClick={() => console.log("Performing search for:", searchTerm)}
+        >
+          Search
+        </button>
       </div>
 
       <div className="flex flex-wrap justify-center">
@@ -111,4 +119,6 @@ export default function ListingsPage() {
       </div>
     </section>
   );
-}
+};
+
+export default ListingsPage;
