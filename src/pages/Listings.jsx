@@ -63,14 +63,14 @@ const ListingsPage = () => {
   }
 
   return (
-    <section>
+    <section className="bg-white">
       <h1 className="flex justify-center mb-4 text-4xl font-bold">
         All Listings
       </h1>
       <div className="flex justify-center mb-4">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search item..."
           className="flex w-4/6 p-2 border border-gray-600 bg-inherit"
           value={searchTerm}
           onChange={handleSearchChange}
@@ -106,7 +106,7 @@ const ListingsPage = () => {
                   />
                 )}
               </div>
-              <div className="px-6 py-4">
+              <div className="px-6 py-4 text-black">
                 <h2 className="mb-2 text-xl font-bold">{item?.title}</h2>
                 <p className="text-base text-gray-700">{item?.description}</p>
                 <p className="text-base text-gray-700">

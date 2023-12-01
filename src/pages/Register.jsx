@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -7,6 +8,16 @@ function RegisterForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
+    return () => {
+      document.body.style.backgroundImage = "none";
+    };
+  }, []);
 
   const navigateToHome = () => {
     setTimeout(() => {

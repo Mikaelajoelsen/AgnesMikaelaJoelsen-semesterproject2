@@ -1,4 +1,4 @@
-import "./login.css";
+import { useEffect } from "react";
 import { useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -8,6 +8,16 @@ function LoginForm() {
   const [data, setData] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
+    return () => {
+      document.body.style.backgroundImage = "none";
+    };
+  }, []);
 
   const navigateToHome = () => {
     setTimeout(() => {
@@ -66,7 +76,7 @@ function LoginForm() {
         </h2>
         {isSuccess ? (
           <section>
-            <p className="text-center text-green-900">
+            <p className="text-center text-red-900">
               👋 Hi {data?.name}. You will now redirect to the home page!
             </p>
           </section>
