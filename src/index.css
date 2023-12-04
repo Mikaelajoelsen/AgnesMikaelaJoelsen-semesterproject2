@@ -74,3 +74,6 @@ button:focus-visible {
 img {
   max-width: 100%;
 }
+ListingsPage {
+  background-color: #ffffff;
+}

@@ -71,7 +71,7 @@ const ListingsPage = () => {
         <input
           type="text"
           placeholder="Search item..."
-          className="flex w-4/6 p-2 border border-gray-600 bg-inherit"
+          className="flex w-2/3 p-2 border border-gray-600 bg-inherit"
           value={searchTerm}
           onChange={handleSearchChange}
         />
@@ -83,17 +83,17 @@ const ListingsPage = () => {
         </button>
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
         {filteredListings.map((item) => (
           <div
             key={item?.id}
-            className="w-full max-w-xs m-4 overflow-hidden bg-white rounded shadow-lg"
+            className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl"
           >
             <Link
               className="item-link"
               to={`/listing/${item.id}?id=${item.id}`}
             >
-              <div className="relative" style={{ paddingBottom: "75%" }}>
+              <div className="relative" style={{ paddingBottom: "100%" }}>
                 {item?.media && (
                   <img
                     src={item?.media}
