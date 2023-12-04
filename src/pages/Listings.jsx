@@ -16,6 +16,8 @@ const ListingsPage = () => {
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const listingsPerPage = 12;
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -58,6 +60,16 @@ const ListingsPage = () => {
     setFilteredListings(filtered);
   };
 
+  // Calculate the indexes for the current page
+  const indexOfLastListing = currentPage * listingsPerPage;
+  const indexOfFirstListing = indexOfLastListing - listingsPerPage;
+  const currentListings = filteredListings.slice(
+    indexOfFirstListing,
+    indexOfLastListing
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -84,7 +96,7 @@ const ListingsPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
-        {filteredListings.map((item) => (
+        {currentListings.map((item) => (
           <div
             key={item?.id}
             className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl"
@@ -116,6 +128,27 @@ const ListingsPage = () => {
             </Link>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-center mt-4">
+        {filteredListings.length > listingsPerPage && (
+          <div className="flex space-x-2">
+            <button
+              className="px-3 py-2 bg-gray-300 rounded"
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              {"<"}
+            </button>
+            <button
+              className="px-3 py-2 bg-gray-300 rounded"
+              onClick={() => paginate(currentPage + 1)}
+              disabled={indexOfLastListing >= filteredListings.length}
+            >
+              {">"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
