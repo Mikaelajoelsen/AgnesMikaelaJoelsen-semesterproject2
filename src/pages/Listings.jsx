@@ -76,7 +76,7 @@ const ListingsPage = () => {
 
   return (
     <section className="bg-white">
-      <h1 className="flex justify-center mb-4 text-4xl font-bold">
+      <h1 className="flex justify-center mb-4 text-4xl font-thin text-black">
         All Listings
       </h1>
       <div className="flex justify-center mb-4">
@@ -130,22 +130,22 @@ const ListingsPage = () => {
         ))}
       </div>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 mb-12">
         {filteredListings.length > listingsPerPage && (
           <div className="flex space-x-2">
             <button
-              className="px-3 py-2 bg-gray-300 rounded"
+              className="px-3 py-2 font-thin text-black border border-black rounded-full  bg-inherit"
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              {"<"}
+              {"Prev"}
             </button>
             <button
-              className="px-3 py-2 bg-gray-300 rounded"
+              className="px-3 py-2 font-thin text-black border border-black rounded-full  bg-inherit"
               onClick={() => paginate(currentPage + 1)}
               disabled={indexOfLastListing >= filteredListings.length}
             >
-              {">"}
+              {"Next"}
             </button>
           </div>
         )}

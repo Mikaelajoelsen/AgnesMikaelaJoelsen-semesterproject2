@@ -1,4 +1,5 @@
 import Listings from "./Listings";
+import { Link } from "@tanstack/react-router";
 
 export default function HomePage() {
   return (
@@ -23,7 +24,7 @@ export default function HomePage() {
             you.
           </p>
           <button className="flex px-4 py-2 mx-auto font-bold text-white border border-white rounded-full bg-inherit">
-            SIGN UP
+            <Link to="/register">SIGN UP</Link>
           </button>
         </div>
       </div>

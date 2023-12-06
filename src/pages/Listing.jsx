@@ -57,13 +57,18 @@ export default function ListingPage() {
 
   return (
     <Link className="button" to={`/listing/${item.id}`}>
-      <div className="flex flex-col max-w-xl mx-auto mb-6 overflow-hidden bg-white border shadow-lg rounded-m sm:flex-row">
+      <div className="flex flex-col w-3/4 mx-auto mt-12 mb-6 overflow-hidden sm:flex-row">
         <div className="sm:w-1/2">
-          <img className="object-cover w-full h-64" src={item?.media} alt="" />
-          <p className="flex justify-center text-black">Description</p>
+          <img
+            className="object-cover w-full rounded-2xl h-72"
+            src={item?.media}
+            alt=""
+          />
+          <p className="flex justify-center mt-4 text-black ">Description</p>
+          <p className="flex justify-center text-black">{item?.description}</p>
         </div>
         <div className="p-6 sm:w-1/2">
-          <h1 className="flex justify-center mb-2 text-3xl font-bold text-black">
+          <h1 className="flex justify-center mb-2 text-5xl font-bold text-black">
             {item?.title}
           </h1>
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">

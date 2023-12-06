@@ -21,7 +21,7 @@ export default function Example() {
           <div className="px-2 mx-auto border border-y-black max-w-7xl sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                <Disclosure.Button className="relative inline-flex items-center justify-center p-2 text-gray-800 rounded-md hover:bg-gray-700 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="relative inline-flex items-center justify-center p-2 text-black rounded-md hover:bg-pink-100 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -56,7 +56,7 @@ export default function Example() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative p-1 text-gray-400 rounded-full hover:text-black focus:outline-none focus:ring-2 focus:ring-pink-300"
+                  className="relative p-1 text-black rounded-full hover:text-black focus:outline-none focus:ring-2 focus:ring-pink-300"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -79,14 +79,14 @@ export default function Example() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-pink-500 rounded-md shadow-lg ring-1 ring-pink-300 ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-pink-100 rounded-md shadow-lg ring-1 ring-pink-300 ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-black" : "",
-                              "block px-4 py-2 text-sm text-pink-200"
+                              active ? "bg-pink-200" : "",
+                              "block px-4 py-2 text-sm text-black"
                             )}
                           >
                             Your Profile
@@ -98,8 +98,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-black" : "",
-                              "block px-4 py-2 text-sm text-pink-200"
+                              active ? "bg-pink-200" : "",
+                              "block px-4 py-2 text-sm text-black"
                             )}
                           >
                             Settings
@@ -111,8 +111,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-black" : "",
-                              "block px-4 py-2 text-sm text-pink-200"
+                              active ? "bg-pink-200" : "",
+                              "block px-4 py-2 text-sm text-black"
                             )}
                           >
                             Sign out
