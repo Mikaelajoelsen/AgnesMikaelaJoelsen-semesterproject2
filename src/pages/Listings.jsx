@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { IoMdSearch } from "react-icons/io";
 
 const getRandomImage = async () => {
   try {
@@ -75,23 +76,23 @@ const ListingsPage = () => {
   }
 
   return (
-    <section className="bg-white">
-      <h1 className="flex justify-center mb-4 text-4xl font-thin text-black">
+    <section className="mt-10 bg-white">
+      <h1 className="flex justify-start mb-4 ml-5 text-4xl font-thin text-black">
         All Listings
       </h1>
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-start mb-4 ml-2">
         <input
           type="text"
           placeholder="Search item..."
-          className="flex w-2/3 p-2 border border-gray-600 bg-inherit"
+          className="flex w-2/3 p-2 border border-gray-600 rounded-full bg-inherit"
           value={searchTerm}
           onChange={handleSearchChange}
         />
         <button
-          className="flex font-thin text-black border-gray-600 rounded-none bg-inherit"
+          className="flex text-xl font-bold text-black pointer-events-none bg-inherit"
           onClick={() => console.log("Performing search for:", searchTerm)}
         >
-          Search
+          <IoMdSearch />
         </button>
       </div>
 
@@ -134,14 +135,14 @@ const ListingsPage = () => {
         {filteredListings.length > listingsPerPage && (
           <div className="flex space-x-2">
             <button
-              className="px-3 py-2 font-thin text-black border border-black rounded-full  bg-inherit"
+              className="px-3 py-2 font-thin text-black border border-black rounded-full bg-inherit"
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >
               {"Prev"}
             </button>
             <button
-              className="px-3 py-2 font-thin text-black border border-black rounded-full  bg-inherit"
+              className="px-3 py-2 font-thin text-black border border-black rounded-full bg-inherit"
               onClick={() => paginate(currentPage + 1)}
               disabled={indexOfLastListing >= filteredListings.length}
             >

@@ -1,5 +1,6 @@
 import Listings from "./Listings";
 import { Link } from "@tanstack/react-router";
+import { MdExplore } from "react-icons/md";
 
 export default function HomePage() {
   return (
@@ -23,8 +24,22 @@ export default function HomePage() {
             Explore a world of exciting auctions and find unique items just for
             you.
           </p>
-          <button className="flex px-4 py-2 mx-auto font-bold text-white border border-white rounded-full bg-inherit">
-            <Link to="/register">SIGN UP</Link>
+          <button className="flex items-center px-4 py-2 mx-auto font-bold text-white border border-white rounded-full bg-inherit">
+            <Link
+              to="/register"
+              className="flex items-center justify-center w-full h-full text-white"
+            >
+              SIGN UP
+            </Link>
+          </button>
+          <button className="flex px-4 py-2 mx-auto mt-3 font-bold text-white border border-white rounded-full bg-inherit">
+            <Link
+              to="/listings"
+              className="flex items-center justify-center w-full h-full text-white"
+            >
+              <MdExplore className="mr-2" />
+              EXPLORE
+            </Link>
           </button>
         </div>
       </div>

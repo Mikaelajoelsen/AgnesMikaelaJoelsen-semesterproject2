@@ -10,11 +10,14 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="w-screen text-gray-500 bg-pink-50/50">
+    <footer className="w-screen text-black border bg-gray-100/50 border-y-black">
       <div className="container flex flex-wrap justify-around py-8 mx-auto">
         <div className="w-full mb-8 md:w-1/4">
           <h3 className="mb-4 text-lg font-bold">About Us</h3>
-          <p>Your company description goes here.</p>
+          <p>
+            Welcome to this auction site where u can explore and purchase unique
+            items just for you
+          </p>
         </div>
         <div className="w-full mb-8 md:w-1/4">
           <h3 className="mb-4 text-lg font-bold">Contact Us</h3>

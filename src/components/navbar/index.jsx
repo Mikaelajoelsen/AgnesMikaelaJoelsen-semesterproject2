@@ -56,7 +56,7 @@ export default function Example() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative p-1 text-black rounded-full hover:text-black focus:outline-none focus:ring-2 focus:ring-pink-300"
+                  className="relative p-1 text-black rounded-full hover:text-black focus:outline-none focus:ring-2 focus:ring-pink-200"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -64,7 +64,7 @@ export default function Example() {
 
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="relative flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2">
+                    <Menu.Button className="relative flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-offset-2">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <BellIcon className="w-6 h-6" aria-hidden="true" />
@@ -79,13 +79,13 @@ export default function Example() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-pink-100 rounded-md shadow-lg ring-1 ring-pink-300 ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-pink-200 ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-pink-200" : "",
+                              active ? "bg-white" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -98,7 +98,7 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-pink-200" : "",
+                              active ? "bg-white" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
@@ -111,7 +111,7 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-pink-200" : "",
+                              active ? "bg-white" : "",
                               "block px-4 py-2 text-sm text-black"
                             )}
                           >
