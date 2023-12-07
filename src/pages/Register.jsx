@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 
 function RegisterForm() {
@@ -188,13 +189,12 @@ function RegisterForm() {
               </div>
 
               <div className="mt-2">
-                <button
-                  disabled={isLoading}
-                  type="submit"
-                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black border-black rounded-full shadow-sm hover:bg-zinc-500 focus:outline-none focus:ring focus:border-zinc-600"
+                <Link
+                  to="/login"
+                  className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black border border-black rounded-full shadow-sm hover:bg-zinc-200 focus:outline-none focus:ring focus:border-zinc-600"
                 >
-                  {isLoading ? "Registering" : "Sign up"}
-                </button>
+                  {isLoading ? "Registering" : "Login"}
+                </Link>
               </div>
             </form>
           )}

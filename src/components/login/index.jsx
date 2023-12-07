@@ -148,7 +148,7 @@ function LoginForm() {
             <div className="flex justify-center w-full mt-4 w-86">
               <Link
                 to="/register"
-                className="flex justify-center w-full px-3 py-4 text-lg font-bold leading-6 text-center text-black border-black rounded-full shadow-sm w-86 hover:from-pink-800 hover:to-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-200"
+                className="flex justify-center w-full px-3 py-4 text-lg font-thin leading-6 text-center text-black border border-black rounded-full shadow-sm hover:bg-zinc-200 w-86 hover:from-pink-800 hover:to-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white-200"
               >
                 Register
               </Link>

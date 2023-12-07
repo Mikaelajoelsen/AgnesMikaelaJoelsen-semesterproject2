@@ -6,4 +6,5 @@ export const NAVIGATION = [
   { userMustBeLoggedIn: true, label: "Listings", href: "/Listings" },
   { userMustBeLoggedIn: true, label: "Register", href: "/Register" },
   { userMustBeLoggedIn: true, label: "Sign out", href: "/signout" },
+  { userMustBeLoggedIn: true, label: "Create", href: "/create" },
 ];

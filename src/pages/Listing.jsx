@@ -18,9 +18,35 @@ const initialListingState = {
   id: null,
 };
 
-export default function ListingPage() {
+const calculateTimeRemaining = (endsAt) => {
+  const now = new Date();
+  const endDate = new Date(endsAt);
+  const timeDifference = endDate - now;
+
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+  return { days, hours, minutes, seconds };
+};
+
+const ListingPage = () => {
   const [item, setItem] = useState(initialListingState);
   const [loading, setLoading] = useState(true);
+  const [timeRemaining, setTimeRemaining] = useState(
+    calculateTimeRemaining(initialListingState.endsAt)
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining(calculateTimeRemaining(item.endsAt));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [item.endsAt]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,14 +100,21 @@ export default function ListingPage() {
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
             Time left of Auction:
           </h3>
-          <p className="flex justify-center mb-2 text-gray-500 text-l">
-            dfgjdhghk
+          <p className="flex justify-center mb-2 text-xl text-black">
+            {`${timeRemaining.days} days ${timeRemaining.hours} hours ${timeRemaining.minutes} minutes ${timeRemaining.seconds}`.replace(
+              /-/g,
+              ""
+            )}
           </p>
+          <h3 className="flex justify-center mb-2 text-gray-500 text-l">
+            Seller:
+          </h3>
+          <p className="flex justify-center mb-2 text-gray-500 text-l">Name:</p>
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
             Current Bids:
           </h3>
           <p className="flex justify-center mb-2 text-gray-500 text-l">
-            dfgjdhghk
+            {item._count?.bids}
           </p>
           <p className="text-gray-700">{item?.body}</p>
           <div className="flex justify-between mt-4"></div>
@@ -93,4 +126,6 @@ export default function ListingPage() {
       </div>
     </Link>
   );
-}
+};
+
+export default ListingPage;

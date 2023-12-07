@@ -78,7 +78,7 @@ const ListingsPage = () => {
   return (
     <section className="mt-10 bg-white">
       <h1 className="flex justify-start mb-4 ml-5 text-4xl font-thin text-black">
-        All Listings
+        SEARCH YOUR FAVOURITE LISTING
       </h1>
       <div className="flex justify-start mb-4 ml-2">
         <input
