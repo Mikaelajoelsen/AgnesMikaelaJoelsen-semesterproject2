@@ -36,9 +36,42 @@ const calculateTimeRemaining = (endsAt) => {
 const ListingPage = () => {
   const [item, setItem] = useState(initialListingState);
   const [loading, setLoading] = useState(true);
+  const [bidCount, setBidCount] = useState(0);
+  const [status, setStatus] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(
     calculateTimeRemaining(initialListingState.endsAt)
   );
+
+  const handleOnBid = async (event) => {
+    event.preventDefault();
+    const amount = event.target.elements.bid.value;
+    const itemId = window.location.pathname.split("/")[2];
+    const accessToken = localStorage.getItem("access_token");
+
+    try {
+      const results = await fetch(
+        `https://api.noroff.dev/api/v1/auction/listings/${itemId}/bids`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ amount: Number(amount) }),
+        }
+      );
+
+      const data = await results.json();
+
+      if (results.status !== 200) {
+        throw new Error(data.errors[0].message);
+      }
+      setBidCount(data._count.bids);
+      setStatus("Bid was successfully placed");
+    } catch (error) {
+      setStatus(error.message);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,6 +97,7 @@ const ListingPage = () => {
         if (response.ok) {
           const data = await response.json();
           setItem(data);
+          setBidCount(data._count?.bids);
         } else {
           console.error(`Failed to fetch listing. Status: ${response.status}`);
         }
@@ -82,7 +116,7 @@ const ListingPage = () => {
   }
 
   return (
-    <Link className="button" to={`/listing/${item.id}`}>
+    <>
       <div className="flex flex-col w-3/4 mx-auto mt-12 mb-6 overflow-hidden sm:flex-row">
         <div className="sm:w-1/2">
           <img
@@ -113,18 +147,42 @@ const ListingPage = () => {
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
             Current Bids:
           </h3>
+
+          <form
+            className="flex flex-col justify-center align-middle"
+            onSubmit={handleOnBid}
+          >
+            <label htmlFor="bid">amount</label>
+            <input
+              name="bid"
+              id="bid"
+              type="number"
+              placeholder="100"
+              required
+            />
+            <button
+              type="submit"
+              className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-white rounded-full shadow-sm bg-zinc-500 hover:bg-gray-500 focus:outline-none focus:ring focus:border-zinc-600"
+            >
+              Place bid +
+            </button>
+          </form>
+
+          <div className="flex justify-center">{status}</div>
+
           <p className="flex justify-center mb-2 text-gray-500 text-l">
-            {item._count?.bids}
+            {bidCount}
           </p>
           <p className="text-gray-700">{item?.body}</p>
           <div className="flex justify-between mt-4"></div>
           <div className="flex flex-wrap justify-center space-x-3 text-black">
-            <button className="flex-2">Number</button>
-            <button className="flex-2">Place Bid +</button>
+            <button onClick={() => console.log("click")} className="flex-2">
+              Number
+            </button>
           </div>
         </div>
       </div>
-    </Link>
+    </>
   );
 };
 

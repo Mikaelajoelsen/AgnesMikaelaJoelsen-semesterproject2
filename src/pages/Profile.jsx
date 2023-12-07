@@ -58,7 +58,7 @@ export default function ProfilePage() {
           />
         )}
       </div>
-      <h1 className="mb-6 text-4xl font-thin text-black">Profile Page</h1>
+      <h1 className="mb-6 text-4xl font-thin text-black">YOUR PROFILE</h1>
       <div className="p-8 rounded-md shadow-md bg-rose-50/50">
         <div className="mb-4">
           <label className="block mb-2 text-sm font-bold text-gray-700">
@@ -89,7 +89,7 @@ export default function ProfilePage() {
             />
             <button
               type="submit"
-              className="px-4 py-2 mt-2 ml-10 font-thin text-black border border-black rounded-md bg-inherit hover:bg-gray-300"
+              className="px-4 py-2 mt-2 ml-10 font-thin text-black border border-black rounded-md bg-inherit hover:bg-pink-50"
             >
               Update Avatar
             </button>
