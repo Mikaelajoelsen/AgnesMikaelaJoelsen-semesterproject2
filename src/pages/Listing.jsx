@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import { API_URL } from "../lib/constants";
 
 const initialListingState = {
