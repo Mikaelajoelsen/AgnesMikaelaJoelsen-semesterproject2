@@ -15,7 +15,7 @@ export default function HomePage() {
             loop
             muted
           >
-            <source src="./images/texture.mp4" type="video/mp4" />
+            <source src="" type="video/mp4" />
           </video>
         </div>
         <div className="p-4 mt-12 md:w-1/2">
