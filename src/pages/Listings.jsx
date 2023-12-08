@@ -26,7 +26,7 @@ const ListingsPage = () => {
 
       try {
         const res = await fetch(
-          "https://api.noroff.dev/api/v1/auction/listings"
+          "https://api.noroff.dev/api/v1/auction/listings?sort=created&sortOrder=desc"
         );
         const data = await res.json();
 

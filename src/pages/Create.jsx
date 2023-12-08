@@ -1,7 +1,5 @@
 import { API_URL } from "./../lib/constants";
-import { useEffect } from "react";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function CreatePage() {
@@ -9,11 +7,12 @@ export default function CreatePage() {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [formData, setFormData] = useState({
     title: "",
-    text: "",
-    url: "",
-    tag: "",
-    endAuctionDate: "",
+    description: "",
+    media: [""],
+    endsAt: "",
   });
+  const [success, setSuccess] = useState(false);
+  const [listings, setListings] = useState([]);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
@@ -25,35 +24,72 @@ export default function CreatePage() {
     };
   }, []);
 
-  const createListing = (event) => {
+  useEffect(() => {
+    fetchListings();
+  }, [success]);
+
+  const fetchListings = async () => {
+    try {
+      const response = await fetch(`${API_URL}/listings`);
+      const data = await response.json();
+      setListings(data);
+    } catch (error) {
+      console.error("Fetch listings error:", error);
+    }
+  };
+
+  const createListing = async (event) => {
     event.preventDefault();
 
-    const { title, text, url, tag, endAuctionDate } = formData;
+    const { title, description, media, endsAt } = formData;
     const accessToken = localStorage.getItem("access_token");
 
-    fetch(`${API_URL}/listings`, {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-        body: text,
-        tags: [tag],
-        media: url,
-        endAuctionDate,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).then((response) => {
-      if (response.status < 300) {
-        navigate({ to: "/" });
+    try {
+      const response = await fetch(`${API_URL}/listings`, {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          description,
+          tags: [formData.tag],
+          media,
+          endsAt,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        console.log("Created Post:", responseData);
+
+        setSuccess(true);
+      } else if (response.status === 400 && responseData.errors) {
+        responseData.errors.forEach((error) => {
+          if (error.code === "invalid_type" && error.path[0] === "endsAt") {
+            console.error("Error: endsAt is required");
+          } else {
+            console.error("Error:", error.message);
+          }
+        });
+      } else {
+        console.error("Error:", responseData.message);
       }
-    });
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
   };
 
   const previewImage = (event) => {
     const imageUrl = event.target.value;
     setImagePreviewUrl(imageUrl);
+
+    setFormData({
+      ...formData,
+      media: [imageUrl],
+    });
   };
 
   const handleInputChange = (event) => {
@@ -89,14 +125,14 @@ export default function CreatePage() {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="text"
+                htmlFor="description"
                 className="block text-sm font-medium text-gray-700"
               >
                 Description:
               </label>
               <textarea
-                id="text"
-                name="text"
+                id="description"
+                name="description"
                 className="w-full p-2 mt-1 border rounded-md"
                 required
                 onChange={handleInputChange}
@@ -104,15 +140,15 @@ export default function CreatePage() {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="url"
+                htmlFor="media"
                 className="block text-sm font-medium text-gray-700"
               >
                 Gallery Images
               </label>
               <input
                 type="text"
-                id="url"
-                name="url"
+                id="media"
+                name="media"
                 className="w-full p-2 mt-1 border rounded-md"
                 onChange={previewImage}
               />
@@ -134,15 +170,15 @@ export default function CreatePage() {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="endAuctionDate"
+                htmlFor="endsAt"
                 className="block text-sm font-medium text-gray-700"
               >
                 End Auction Date:
               </label>
               <input
                 type="datetime-local"
-                id="endAuctionDate"
-                name="endAuctionDate"
+                id="endsAt"
+                name="endsAt"
                 className="w-full p-2 mt-1 border rounded-md"
                 onChange={handleInputChange}
               />

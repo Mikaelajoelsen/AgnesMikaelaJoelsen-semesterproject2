@@ -174,11 +174,7 @@ const ListingPage = () => {
           </p>
           <p className="text-gray-700">{item?.body}</p>
           <div className="flex justify-between mt-4"></div>
-          <div className="flex flex-wrap justify-center space-x-3 text-black">
-            <button onClick={() => console.log("click")} className="flex-2">
-              Number
-            </button>
-          </div>
+          <div className="flex flex-wrap justify-center space-x-3 text-black"></div>
         </div>
       </div>
     </>
