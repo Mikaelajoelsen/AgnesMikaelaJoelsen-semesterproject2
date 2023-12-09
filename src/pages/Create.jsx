@@ -1,6 +1,6 @@
 import { API_URL } from "./../lib/constants";
-import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 export default function CreatePage() {
   const navigate = useNavigate();
