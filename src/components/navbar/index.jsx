@@ -6,7 +6,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { IoCreateOutline } from "react-icons/io5";
-import { SlLogin } from "react-icons/sl"; // Import SlLogin icon
+import { SlLogin } from "react-icons/sl";
 import { Link } from "@tanstack/react-router";
 
 const navigation = [
@@ -156,6 +156,19 @@ export default function Navbar() {
                         {({ active }) => (
                           <Link
                             to="/create"
+                            className={classNames(
+                              active ? "bg-white" : "",
+                              "block px-4 py-2 text-sm text-black"
+                            )}
+                          >
+                            Create
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/mylistings"
                             className={classNames(
                               active ? "bg-white" : "",
                               "block px-4 py-2 text-sm text-black"

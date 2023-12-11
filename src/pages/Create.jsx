@@ -1,6 +1,6 @@
-import { API_URL } from "./../lib/constants";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { API_URL } from "./../lib/constants";
 
 export default function CreatePage() {
   const navigate = useNavigate();
@@ -12,7 +12,6 @@ export default function CreatePage() {
     endsAt: "",
   });
   const [success, setSuccess] = useState(false);
-  const [listings, setListings] = useState([]);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
@@ -23,20 +22,6 @@ export default function CreatePage() {
       document.body.style.backgroundImage = "none";
     };
   }, []);
-
-  useEffect(() => {
-    fetchListings();
-  }, [success]);
-
-  const fetchListings = async () => {
-    try {
-      const response = await fetch(`${API_URL}/listings`);
-      const data = await response.json();
-      setListings(data);
-    } catch (error) {
-      console.error("Fetch listings error:", error);
-    }
-  };
 
   const createListing = async (event) => {
     event.preventDefault();
@@ -64,6 +49,16 @@ export default function CreatePage() {
 
       if (response.ok) {
         console.log("Created Post:", responseData);
+
+        navigate("/mylistings");
+
+        setFormData({
+          title: "",
+          description: "",
+          media: [""],
+          endsAt: "",
+        });
+        setImagePreviewUrl("");
 
         setSuccess(true);
       } else if (response.status === 400 && responseData.errors) {

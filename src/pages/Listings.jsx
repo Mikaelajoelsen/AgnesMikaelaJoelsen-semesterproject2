@@ -61,7 +61,6 @@ const ListingsPage = () => {
     setFilteredListings(filtered);
   };
 
-  // Calculate the indexes for the current page
   const indexOfLastListing = currentPage * listingsPerPage;
   const indexOfFirstListing = indexOfLastListing - listingsPerPage;
   const currentListings = filteredListings.slice(
