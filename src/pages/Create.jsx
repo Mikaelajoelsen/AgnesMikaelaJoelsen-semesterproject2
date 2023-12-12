@@ -10,7 +10,9 @@ export default function CreatePage() {
     description: "",
     media: [""],
     endsAt: "",
+    tag: "",
   });
+
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function CreatePage() {
   const createListing = async (event) => {
     event.preventDefault();
 
-    const { title, description, media, endsAt } = formData;
+    const { title, description, media, endsAt, tag } = formData;
     const accessToken = localStorage.getItem("access_token");
 
     try {
@@ -35,7 +37,7 @@ export default function CreatePage() {
         body: JSON.stringify({
           title,
           description,
-          tags: [formData.tag],
+          tags: [tag],
           media,
           endsAt,
         }),
@@ -57,6 +59,7 @@ export default function CreatePage() {
           description: "",
           media: [""],
           endsAt: "",
+          tag: "",
         });
         setImagePreviewUrl("");
 

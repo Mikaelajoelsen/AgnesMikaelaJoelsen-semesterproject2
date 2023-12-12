@@ -30,13 +30,15 @@ function RegisterForm() {
     event.preventDefault();
 
     const { email, password, name, avatar } = event.target.elements;
-
+    console.log(email, password, name, avatar);
     const payload = {
       name: name.value,
       email: email.value,
       avatar: avatar?.value,
       password: password.value,
     };
+
+    console.log(payload);
 
     try {
       const res = await fetch(

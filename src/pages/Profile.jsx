@@ -1,34 +1,73 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { FaSpinner } from "react-icons/fa";
+import { CiUser } from "react-icons/ci";
 
 export default function ProfilePage() {
-  const [avatar, setAvatar] = useState("path/to/default-avatar.jpg");
+  const [avatar, setAvatar] = useState(null);
   const [newAvatar, setNewAvatar] = useState(null);
   const [isChangingAvatar, setIsChangingAvatar] = useState(false);
   const [isAvatarUpdated, setIsAvatarUpdated] = useState(false);
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
-    return () => {
-      document.body.style.backgroundImage = "none";
+
+    const userName = window.localStorage.getItem("name");
+    const fetchUserProfile = async (userId) => {
+      try {
+        const response = await fetch(
+          `https://api.noroff.dev/api/v1/auction/profiles/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user profile");
+        }
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data.length > 0) {
+          const user = data[0];
+
+          setAvatar(user.avatar);
+          setProfileData(user);
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
     };
+
+    fetchUserProfile(userName);
+
+    return () => {};
   }, []);
 
   const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+    const input = e.target.value;
+    setIsChangingAvatar(true);
+    setIsAvatarUpdated(false);
 
-    reader.onloadend = () => {
-      setNewAvatar(reader.result);
-    };
+    if (input.startsWith("http") || input.startsWith("https")) {
+      setNewAvatar(input);
+    } else {
+      const file = e.target.files[0];
+      const reader = new FileReader();
 
-    if (file) {
-      reader.readAsDataURL(file);
-      setIsChangingAvatar(true);
-      setIsAvatarUpdated(false);
+      reader.onloadend = () => {
+        setNewAvatar(reader.result);
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -44,56 +83,78 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-20 mb-20">
+    <div className="max-w-2xl px-4 mx-auto mt-20 mb-20">
       <div className="flex items-center justify-center mb-6">
         {isChangingAvatar ? (
           <div className="flex items-center justify-center w-32 h-32 border-4 border-black rounded-full">
-            <span className="text-4xl animate-spin">&#x21BB;</span>
+            <FaSpinner className="text-4xl animate-spin" />
           </div>
         ) : (
-          <img
-            src={avatar}
-            alt="Profile"
-            className="w-32 h-32 border-4 border-white rounded-full"
-          />
+          <div className="w-32 h-32">
+            {avatar ? (
+              <img
+                src={avatar}
+                alt="Profile"
+                className="w-full h-full rounded-full"
+              />
+            ) : (
+              <CiUser className="w-full h-full text-black-50/50" />
+            )}
+          </div>
         )}
       </div>
-      <h1 className="mb-6 text-4xl font-thin text-black">YOUR PROFILE</h1>
-      <div className="p-8 rounded-md shadow-md bg-rose-50/50">
+      <h1 className="mb-6 text-2xl font-thin text-black md:text-4xl">
+        YOUR PROFILE
+      </h1>
+      <div className="p-4 rounded-md shadow-md md:p-8 bg-rose-50/50">
         <div className="mb-4">
-          <label className="block mb-2 text-sm font-bold text-gray-700">
+          <label className="block mb-2 text-sm font-bold text-black">
             Username:
           </label>
-          <p className="text-gray-800">YourUsername123</p>
+          <p className="text-black">{profileData?.name || "YourUsername123"}</p>
         </div>
         <div className="mb-4">
-          <label className="block mb-2 text-sm font-bold text-gray-700">
+          <label className="block mb-2 text-sm font-bold text-black">
             Email:
           </label>
-          <p className="text-gray-800">your.email@example.com</p>
+          <p className="text-gray-800">
+            {profileData?.email || "your.email@example.com"}
+          </p>
         </div>
         <div className="mb-4">
-          <label className="block mb-2 text-sm font-bold text-gray-700">
+          <label className="block mb-2 text-sm font-bold text-black">
             Avatar:
           </label>
-          <img src={avatar} alt="Avatar" className="w-16 h-16 rounded-full" />
-          <form onSubmit={handleSubmit}>
-            <label className="block mt-2 text-sm font-bold text-gray-700">
-              Upload New Avatar:
-            </label>
-            <input
-              className="border border-black"
-              type="file"
-              accept="image/*"
-              onChange={handleAvatarChange}
-            />
-            <button
-              type="submit"
-              className="px-4 py-2 mt-2 ml-10 font-thin text-black border border-black rounded-md bg-inherit hover:bg-pink-50"
-            >
-              Update Avatar
-            </button>
-          </form>
+          <div className="flex flex-col items-center md:flex-row">
+            {avatar ? (
+              <img
+                src={avatar}
+                alt="Avatar"
+                className="w-16 h-16 mb-2 rounded-full md:mr-4"
+              />
+            ) : (
+              <CiUser className="w-16 h-16 mb-2 text-black md:mr-4" />
+            )}
+            <form onSubmit={handleSubmit} className="flex flex-col">
+              <label className="text-sm font-bold text-black">
+                Upload New Avatar (URL or File):
+              </label>
+              <div className="flex flex-col items-center md:flex-row">
+                <input
+                  className="w-full px-2 py-1 mb-2 border border-black md:mb-0 md:mr-2"
+                  type="text"
+                  placeholder="Enter URL or choose a file"
+                  onChange={handleAvatarChange}
+                />
+                <button
+                  type="submit"
+                  className="w-full px-4 py-2 font-thin text-black border border-black rounded-md md:w-auto bg-inherit hover:bg-pink-50"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
           {isAvatarUpdated && (
             <div className="mt-2 text-green-500">
               Avatar updated successfully! &#x2713;
