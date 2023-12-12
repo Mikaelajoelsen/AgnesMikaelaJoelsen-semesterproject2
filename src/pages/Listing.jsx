@@ -151,17 +151,18 @@ const ListingPage = () => {
             className="flex flex-col justify-center align-middle"
             onSubmit={handleOnBid}
           >
-            <label htmlFor="bid">amount</label>
+            <label htmlFor="bid"></label>
             <input
               name="bid"
               id="bid"
               type="number"
               placeholder="100"
               required
+              className="mb-2 text-center"
             />
             <button
               type="submit"
-              className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-white rounded-full shadow-sm bg-zinc-500 hover:bg-gray-500 focus:outline-none focus:ring focus:border-zinc-600"
+              className="flex items-center justify-center w-full h-12 px-4 text-lg font-thin text-black rounded-full shadow-sm bg-rose-50/50 hover:bg-rose-50/50 focus:outline-none focus:ring focus:border-zinc-600"
             >
               Place bid +
             </button>

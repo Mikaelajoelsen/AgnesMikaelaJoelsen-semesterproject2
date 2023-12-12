@@ -121,14 +121,11 @@ export default function Navbar() {
                   <span className="sr-only">View notifications</span>
                 </button>
                 <Menu as="div" className="relative ml-3">
-                  <div>
-                    {credits}
-                    <Menu.Button className="relative flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-offset-2">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <UserCircleIcon className="w-6 h-6" aria-hidden="true" />
-                    </Menu.Button>
-                  </div>
+                  <Menu.Button className="relative flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-pink-200 focus:ring-offset-2">
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    <UserCircleIcon className="w-6 h-6" aria-hidden="true" />
+                  </Menu.Button>
                   <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
@@ -150,6 +147,18 @@ export default function Navbar() {
                           >
                             Profile
                           </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div
+                            className={classNames(
+                              active ? "bg-white" : "",
+                              "block px-4 py-2 text-sm text-black"
+                            )}
+                          >
+                            Your Credits: {credits}
+                          </div>
                         )}
                       </Menu.Item>
                       <Menu.Item>
