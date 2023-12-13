@@ -38,6 +38,32 @@ const MyListingsPage = () => {
     fetchListings();
   }, []);
 
+  const handleDeleteListing = async (listingId) => {
+    const accessToken = localStorage.getItem("access_token");
+
+    try {
+      const res = await fetch(
+        `https://api.noroff.dev/api/v1/auction/listings/${listingId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (res.ok) {
+        setListings((prevListings) =>
+          prevListings.filter((listing) => listing.id !== listingId)
+        );
+      } else {
+        console.error("Failed to delete listing:", res.statusText);
+      }
+    } catch (error) {
+      console.error("handleDeleteListing, error:", error);
+    }
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -61,12 +87,18 @@ const MyListingsPage = () => {
                 loading="lazy"
               />
             </div>
-            <div className="px-6 py-4 text-black">
+            <div className="flex flex-col items-center px-6 py-4 text-black">
               <h2 className="mb-2 text-xl font-bold">{listing.title}</h2>
               <p className="text-base text-gray-700">{listing.description}</p>
               <p className="text-base text-gray-700">
                 Ends at: {new Date(listing.endsAt).toLocaleString()}
               </p>
+              <button
+                onClick={() => handleDeleteListing(listing.id)}
+                className="px-4 py-2 font-thin text-black rounded bg-inherit hover:bg-red-200"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
