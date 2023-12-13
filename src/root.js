@@ -6,7 +6,7 @@ import ListingsPage from "./pages/Listings";
 import ListingPage from "./pages/Listing";
 import CreatePage from "./pages/Create";
 import ProfilePage from "./pages/Profile";
-import MyListingsPage from "./pages/MyListings";
+import MyListingsPage from "./pages/Mylistings";
 import Root from "./App";
 
 const rootRoute = new RootRoute({
