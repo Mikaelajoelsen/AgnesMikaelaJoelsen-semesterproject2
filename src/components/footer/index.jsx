@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="w-screen text-black border bg-gray-100/50 border-y-black">
+    <footer className="w-screen text-black border bg-rose-50/50 border-y-black">
       <div className="container flex flex-wrap justify-around py-8 mx-auto">
         <div className="w-full mb-8 md:w-1/4">
           <h3 className="mb-4 text-lg font-bold">About Us</h3>
@@ -25,10 +25,10 @@ const Footer = () => {
             <FaEnvelope className="inline-block mr-2" /> Email: info@example.com
           </p>
           <p>
-            <FaFacebook className="inline-block mr-2" />
-            <FaGithub className="inline-block mr-2" />
-            <FaInstagram className="inline-block mr-2" />
-            <FaTwitter className="inline-block mr-2" />
+            <FaFacebook className="inline-block mr-2 hover:text-2xl hover:text-pink-400" />
+            <FaGithub className="inline-block mr-2 hover:text-2xl hover:text-pink-400" />
+            <FaInstagram className="inline-block mr-2 hover:text-2xl hover:text-pink-400" />
+            <FaTwitter className="inline-block mr-2 hover:text-2xl hover:text-pink-400" />
           </p>
         </div>
         <div className="w-full mb-8 md:w-1/4">

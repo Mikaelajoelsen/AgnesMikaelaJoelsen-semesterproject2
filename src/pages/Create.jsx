@@ -14,6 +14,7 @@ export default function CreatePage() {
   });
 
   const [success, setSuccess] = useState(false);
+  console.log(success);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url("./images/login-image.jpg")`;

@@ -26,11 +26,7 @@ export default function HomePage() {
             Explore a world of exciting auctions and find unique items just for
             you.
           </p>
-          {isUserLogged ? (
-            <p>The user is logged in</p>
-          ) : (
-            <p>The user is not logged in</p>
-          )}
+          {isUserLogged ? <p></p> : <p></p>}
           {isUserLogged ? (
             ""
           ) : (

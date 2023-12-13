@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { IoMdSearch } from "react-icons/io";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const getRandomImage = async () => {
   try {
@@ -77,7 +79,7 @@ const ListingsPage = () => {
   return (
     <section className="mt-10 bg-white">
       <h1 className="flex justify-start mb-4 ml-5 text-4xl font-thin text-black">
-        SEARCH YOUR FAVOURITE LISTING
+        SEARCH YOUR FAVOURITE LISTINGS
       </h1>
       <div className="flex justify-start mb-4 ml-2">
         <input
@@ -94,12 +96,11 @@ const ListingsPage = () => {
           <IoMdSearch />
         </button>
       </div>
-
       <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
         {currentListings.map((item) => (
           <div
             key={item?.id}
-            className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl"
+            className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl hover:bg-gray-100"
           >
             <Link
               className="item-link"
@@ -129,23 +130,22 @@ const ListingsPage = () => {
           </div>
         ))}
       </div>
-
       <div className="flex justify-center mt-4 mb-12">
         {filteredListings.length > listingsPerPage && (
           <div className="flex space-x-2">
             <button
-              className="px-3 py-2 font-thin text-black border border-black rounded-full bg-inherit"
+              className="px-3 py-2 text-4xl font-thin text-pink-200 bg-inherit"
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              {"Prev"}
+              {<FaArrowAltCircleLeft />}
             </button>
             <button
-              className="px-3 py-2 font-thin text-black border border-black rounded-full bg-inherit"
+              className="px-3 py-2 text-4xl font-thin text-pink-200 bg-inherit"
               onClick={() => paginate(currentPage + 1)}
               disabled={indexOfLastListing >= filteredListings.length}
             >
-              {"Next"}
+              {<FaArrowAltCircleRight />}
             </button>
           </div>
         )}

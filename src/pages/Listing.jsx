@@ -3,6 +3,7 @@ import { API_URL } from "../lib/constants";
 
 const initialListingState = {
   title: "No post found",
+  name: "Your name",
   body: "Nothing to see here",
   description: "Your Description",
   media: [],
@@ -14,7 +15,19 @@ const initialListingState = {
     bids: 1,
   },
   userId: null,
-  id: null,
+  id: "null",
+  listings: [
+    {
+      id: "string",
+      name: "string",
+      title: "string",
+      description: "string",
+      media: ["https://url.com/image.jpg"],
+      created: "2020-01-01T00:00:00.000Z",
+      updated: "2020-01-01T00:00:00.000Z",
+      endsAt: "2020-01-01T00:00:00.000Z",
+    },
+  ],
 };
 
 const calculateTimeRemaining = (endsAt) => {
@@ -74,11 +87,11 @@ const ListingPage = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining(item.endsAt));
+      setTimeRemaining(calculateTimeRemaining(item?.endsAt));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [item.endsAt]);
+  }, [item?.endsAt]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +133,7 @@ const ListingPage = () => {
         <div className="sm:w-1/2">
           <img
             className="object-cover w-full rounded-2xl h-72"
-            src={item?.media}
+            src={item?.media?.[0]}
             alt=""
           />
           <p className="flex justify-center mt-4 text-black ">Description</p>
@@ -142,10 +155,16 @@ const ListingPage = () => {
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
             Seller:
           </h3>
-          <p className="flex justify-center mb-2 text-gray-500 text-l">Name:</p>
+          <p className="flex justify-center mb-2 text-gray-500 text-l">
+            {item?.name || ""}
+          </p>
+
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
             Current Bids:
           </h3>
+          <p className="flex justify-center mb-2 text-gray-500 text-l">
+            {bidCount}
+          </p>
 
           <form
             className="flex flex-col justify-center align-middle"
@@ -169,10 +188,6 @@ const ListingPage = () => {
           </form>
 
           <div className="flex justify-center">{status}</div>
-
-          <p className="flex justify-center mb-2 text-gray-500 text-l">
-            {bidCount}
-          </p>
           <p className="text-gray-700">{item?.body}</p>
           <div className="flex justify-between mt-4"></div>
           <div className="flex flex-wrap justify-center space-x-3 text-black"></div>

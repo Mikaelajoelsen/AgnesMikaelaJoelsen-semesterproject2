@@ -21,11 +21,16 @@ const MyListingsPage = () => {
         );
         const data = await res.json();
 
-        setListings(data);
+        if (Array.isArray(data)) {
+          setListings(data);
+        } else {
+          console.warn("API response is not an array:", data);
+          setListings([]);
+        }
 
         setIsLoading(false);
       } catch (error) {
-        console.warn("fetchListings, error", error);
+        console.error("fetchListings, error:", error);
         setIsLoading(false);
       }
     };
@@ -38,27 +43,34 @@ const MyListingsPage = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
-      {listings.map((listing, index) => (
-        <div
-          key={index}
-          className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl"
-        >
-          <div className="relative" style={{ paddingBottom: "100%" }}>
-            <img
-              src={listing.media[0]}
-              alt={listing.title}
-              className="absolute object-cover w-full h-full"
-              loading="lazy"
-            />
+    <div>
+      <h1 className="flex justify-center text-4xl font-thin text-black">
+        Your Listings
+      </h1>
+      <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
+        {listings.map((listing) => (
+          <div
+            key={listing.id}
+            className="w-full max-w-xs overflow-hidden bg-white shadow-lg rounded-t-xl"
+          >
+            <div className="relative" style={{ paddingBottom: "100%" }}>
+              <img
+                src={listing.media[0]}
+                alt={listing.title}
+                className="absolute object-cover w-full h-full"
+                loading="lazy"
+              />
+            </div>
+            <div className="px-6 py-4 text-black">
+              <h2 className="mb-2 text-xl font-bold">{listing.title}</h2>
+              <p className="text-base text-gray-700">{listing.description}</p>
+              <p className="text-base text-gray-700">
+                Ends at: {new Date(listing.endsAt).toLocaleString()}
+              </p>
+            </div>
           </div>
-          <div className="px-6 py-4 text-black">
-            <h2 className="mb-2 text-xl font-bold">{listing.title}</h2>
-            <p className="text-base text-gray-700">{listing.description}</p>
-            <p className="text-base text-gray-700">Ends at: {listing.endsAt}</p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
