@@ -27,9 +27,12 @@ const ListingsPage = () => {
       setIsLoading(true);
 
       try {
-        const res = await fetch(
+        const url = new URL(
           "https://api.noroff.dev/api/v1/auction/listings?sort=created&sortOrder=desc"
         );
+        url.searchParams.append("_seller", "true");
+
+        const res = await fetch(url);
         const data = await res.json();
 
         const updatedListings = await Promise.all(
@@ -122,6 +125,7 @@ const ListingsPage = () => {
               <div className="px-6 py-4 text-black">
                 <h2 className="mb-2 text-xl font-bold">{item?.title}</h2>
                 <p className="text-base text-gray-700">{item?.description}</p>
+                <p className="text-base text-gray-700">{item?.seller.name}</p>
                 <p className="text-base text-gray-700">
                   Ends at: {item?.endsAt}
                 </p>

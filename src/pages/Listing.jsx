@@ -153,13 +153,6 @@ const ListingPage = () => {
             )}
           </p>
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
-            Seller:
-          </h3>
-          <p className="flex justify-center mb-2 text-gray-500 text-l">
-            {item?.name || ""}
-          </p>
-
-          <h3 className="flex justify-center mb-2 text-gray-500 text-l">
             Current Bids:
           </h3>
           <p className="flex justify-center mb-2 text-gray-500 text-l">
