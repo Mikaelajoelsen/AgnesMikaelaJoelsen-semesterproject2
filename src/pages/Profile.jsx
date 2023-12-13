@@ -10,7 +10,7 @@ export default function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
+    document.body.style.backgroundImage = `url("/login-image.jpg")`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";

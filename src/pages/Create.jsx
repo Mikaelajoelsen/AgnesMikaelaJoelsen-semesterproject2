@@ -17,7 +17,7 @@ export default function CreatePage() {
   console.log(success);
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url("./images/login-image.jpg")`;
+    document.body.style.backgroundImage = `url("/login-image.jpg")`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
