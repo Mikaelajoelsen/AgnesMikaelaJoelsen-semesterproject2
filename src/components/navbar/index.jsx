@@ -194,7 +194,7 @@ export default function Navbar() {
                             onClick={logout}
                             className={classNames(
                               active ? "bg-white" : "",
-                              "block px-4 py-2 text-sm text-black hover:text-pink-200"
+                              "block px-4 py-2 text-sm text-black"
                             )}
                           >
                             Sign out
