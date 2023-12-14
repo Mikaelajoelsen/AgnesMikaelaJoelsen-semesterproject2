@@ -140,7 +140,7 @@ const ListingPage = () => {
           <p className="flex justify-center text-black">{item?.description}</p>
         </div>
         <div className="p-6 sm:w-1/2">
-          <h1 className="flex justify-center mb-2 text-5xl font-bold text-black">
+          <h1 className="flex justify-center mb-2 text-2xl font-bold text-black">
             {item?.title}
           </h1>
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">

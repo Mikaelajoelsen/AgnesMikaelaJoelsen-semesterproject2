@@ -139,12 +139,6 @@ function RegisterForm() {
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-900"
                   ></label>
-                  <a
-                    href="#"
-                    className="text-sm font-semibold text-gray-600 hover:text-gray-500"
-                  >
-                    Forgot password?
-                  </a>
                 </div>
                 <input
                   id="password"
