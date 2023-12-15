@@ -20,9 +20,9 @@ function RegisterForm() {
     };
   }, []);
 
-  const navigateToHome = () => {
+  const navigateToLogin = () => {
     setTimeout(() => {
-      navigate({ to: "/" });
+      navigate({ to: "/login" });
     }, 2000);
   };
 
@@ -58,7 +58,7 @@ function RegisterForm() {
       } else {
         localStorage.setItem("email", email.value);
         setIsSuccess(res.ok);
-        navigateToHome();
+        navigateToLogin();
       }
     } catch (error) {
       console.warn("An error occurred", error);
