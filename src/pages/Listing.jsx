@@ -58,7 +58,7 @@ const ListingPage = () => {
 
     try {
       const results = await fetch(
-        `https://api.noroff.dev/api/v1/auction/listings/${itemId}/?_bids=true`,
+        `https://api.noroff.dev/api/v1/auction/listings/${itemId}/bids`,
         {
           method: "POST",
           headers: {
