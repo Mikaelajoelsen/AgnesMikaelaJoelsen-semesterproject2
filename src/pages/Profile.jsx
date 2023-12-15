@@ -16,10 +16,10 @@ export default function ProfilePage() {
     document.body.style.backgroundPosition = "center";
 
     const userName = window.localStorage.getItem("name");
-    const fetchUserProfile = async (userId) => {
+    const fetchUserProfile = async (userName) => {
       try {
         const response = await fetch(
-          `https://api.noroff.dev/api/v1/auction/profiles/${userId}`,
+          `https://api.noroff.dev/api/v1/auction/profiles/${userName}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -34,20 +34,16 @@ export default function ProfilePage() {
         const data = await response.json();
         console.log(data);
 
-        if (data.length > 0) {
-          const user = data[0];
-
-          setAvatar(user.avatar);
-          setProfileData(user);
-        }
+        setAvatar(data.avatar);
+        setProfileData(data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     };
 
     fetchUserProfile(userName);
-
-    return () => {};
+    console.log(profileData);
+    return;
   }, []);
 
   const handleAvatarChange = (e) => {
@@ -82,6 +78,7 @@ export default function ProfilePage() {
     setIsChangingAvatar(false);
   };
 
+  console.log(profileData);
   return (
     <div className="max-w-2xl px-4 mx-auto mt-20 mb-20">
       <div className="flex items-center justify-center mb-6">
@@ -111,15 +108,13 @@ export default function ProfilePage() {
           <label className="block mb-2 text-sm font-bold text-black">
             Username:
           </label>
-          <p className="text-black">{profileData?.name || "YourUsername123"}</p>
+          <p className="text-black">{profileData?.name}</p>
         </div>
         <div className="mb-4">
           <label className="block mb-2 text-sm font-bold text-black">
             Email:
           </label>
-          <p className="text-gray-800">
-            {profileData?.email || "your.email@example.com"}
-          </p>
+          <p className="text-gray-800">{profileData?.email}</p>
         </div>
         <div className="mb-4">
           <label className="block mb-2 text-sm font-bold text-black">
