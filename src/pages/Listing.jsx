@@ -58,7 +58,7 @@ const ListingPage = () => {
 
     try {
       const results = await fetch(
-        `https://api.noroff.dev/api/v1/auction/listings/${itemId}/bids`,
+        `https://api.noroff.dev/api/v1/auction/listings/${itemId}/?_bids=true`,
         {
           method: "POST",
           headers: {
@@ -95,16 +95,20 @@ const ListingPage = () => {
         const itemId = window.location.pathname.split("/")[2];
         const accessToken = localStorage.getItem("access_token");
 
-        const response = await fetch(`${API_URL}/listings/${itemId}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await fetch(
+          `${API_URL}/listings/${itemId}/?_bids=true`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
           setItem(data);
+          console.log(data);
           setBids(data?.bids || []);
         } else {
           console.error(`Failed to fetch listing. Status: ${response.status}`);
