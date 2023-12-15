@@ -132,8 +132,10 @@ const ListingPage = () => {
             src={item?.media?.[0]}
             alt=""
           />
-          <p className="flex justify-center mt-4 text-black ">Description</p>
-          <p className="flex justify-center text-black">{item?.description}</p>
+          <p className="flex justify-center mt-4 font-bold text-black ">
+            Description
+          </p>
+          <p className="flex justify-center">{item?.description}</p>
         </div>
         <div className="p-6 sm:w-1/2">
           <h1 className="flex justify-center mb-2 text-2xl font-bold text-black">
