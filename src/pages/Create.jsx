@@ -53,7 +53,7 @@ export default function CreatePage() {
       if (response.ok) {
         console.log("Created Post:", responseData);
 
-        navigate("/mylistings");
+        navigate("/Mylistings");
 
         setFormData({
           title: "",
@@ -193,7 +193,7 @@ export default function CreatePage() {
                   className="rounded-md max-h-32"
                 />
               )}
-            </div>
+            </div>{" "}
             <button
               type="submit"
               className="px-6 py-2 font-thin text-black border border-black rounded-md bg-inherit hover:bg-pink-50 focus:outline-none focus:ring focus:border-gray-300"

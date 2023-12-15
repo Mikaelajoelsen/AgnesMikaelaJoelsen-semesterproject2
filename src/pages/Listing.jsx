@@ -16,16 +16,12 @@ const initialListingState = {
   },
   userId: null,
   id: "null",
-  listings: [
+  bids: [
     {
       id: "string",
-      name: "string",
-      title: "string",
-      description: "string",
-      media: ["https://url.com/image.jpg"],
+      userId: "string",
+      amount: "100",
       created: "2020-01-01T00:00:00.000Z",
-      updated: "2020-01-01T00:00:00.000Z",
-      endsAt: "2020-01-01T00:00:00.000Z",
     },
   ],
 };
@@ -48,7 +44,7 @@ const calculateTimeRemaining = (endsAt) => {
 const ListingPage = () => {
   const [item, setItem] = useState(initialListingState);
   const [loading, setLoading] = useState(true);
-  const [bidCount, setBidCount] = useState(0);
+  const [bids, setBids] = useState([]);
   const [status, setStatus] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(
     calculateTimeRemaining(initialListingState.endsAt)
@@ -78,7 +74,7 @@ const ListingPage = () => {
       if (results.status !== 200) {
         throw new Error(data.errors[0].message);
       }
-      setBidCount(data._count.bids);
+      setBids([...bids, data]);
       setStatus("Bid was successfully placed");
     } catch (error) {
       setStatus(error.message);
@@ -109,7 +105,7 @@ const ListingPage = () => {
         if (response.ok) {
           const data = await response.json();
           setItem(data);
-          setBidCount(data._count?.bids);
+          setBids(data?.bids || []);
         } else {
           console.error(`Failed to fetch listing. Status: ${response.status}`);
         }
@@ -153,10 +149,10 @@ const ListingPage = () => {
             )}
           </p>
           <h3 className="flex justify-center mb-2 text-gray-500 text-l">
-            Current Bids:
+            Total Bids:
           </h3>
           <p className="flex justify-center mb-2 text-gray-500 text-l">
-            {bidCount}
+            {bids.length}
           </p>
 
           <form
@@ -182,8 +178,6 @@ const ListingPage = () => {
 
           <div className="flex justify-center">{status}</div>
           <p className="text-gray-700">{item?.body}</p>
-          <div className="flex justify-between mt-4"></div>
-          <div className="flex flex-wrap justify-center space-x-3 text-black"></div>
         </div>
       </div>
     </>
